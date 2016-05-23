@@ -1,0 +1,19 @@
+body{
+  background: #333;
+}
+
+#page:after{
+  content:"Smarphone Layout";
+}
+
+.no-narrow{
+  display:none;
+}
+
+body{
+  font-size: xx-large;
+}
+
+fotter,input{
+  font-size: large;
+}
