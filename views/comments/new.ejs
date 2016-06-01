@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quiz</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+<p>
+Añadir nuevo comentario: 
+</p>
+
+<p>
+    <form method="POST" action="/quizzes/<%=quiz.id%>/comments/">
+        <input type="text" id="comment" name="comment[text]" value="" placeholder="Comentario" /> <p>
+        <button type="submit">Enviar</button>
+    </form>
+</p>
+
+</body>
+</html>

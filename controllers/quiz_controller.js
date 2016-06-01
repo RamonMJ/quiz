@@ -3,7 +3,7 @@ var Sequelize = require('sequelize');
 
 //Autoload el quiz asociado a :quizId
 exports.load= function(req,res,next, quizId) {
-	models.Quiz.findById(quizId)
+	models.Quiz.findById(quizId, {include: [ models.Comment ] })
 	  .then(function(quiz) {
 	     if(quiz) {
 		req.quiz =quiz;
@@ -94,7 +94,7 @@ exports.create = function(req, res, next) {
 // guarda en DB los campos pregunta y respuesta de quiz
 quiz.save({fields: ["question", "answer"]})
   	.then(function(quiz) {
-	req.flash('success', 'Quiz creado con éxito.');
+	  req.flash('success','Quiz creado con exito.');
     	res.redirect('/quizzes'); 
     })
       .catch(Sequelize.ValidationError, function(error) {
@@ -108,7 +108,7 @@ quiz.save({fields: ["question", "answer"]})
     })
 
     .catch(function(error) {
-		req.flash('error', 'Error al crear un Quiz: '+error.message);
+		req.flash('error,Error al crear un Quiz: ' + error.message);
 		next(error);
 	});  
 };
@@ -130,7 +130,8 @@ exports.update = function(req, res, next) {
 	  req.flash('success', 'Quiz editado con éxito.');
           res.redirect('/quizzes');
     })
-    .catch(Sequelize.ValidationError, function(error) {
+    
+     .catch(Sequelize.ValidationError, function(error) {
 
       req.flash('error', 'Errores en el formulario:');
       for (var i in error.errors) {
@@ -139,6 +140,8 @@ exports.update = function(req, res, next) {
 
       res.render('quizzes/edit', {quiz: req.quiz});
     })
+
+
     .catch(function(error) {
 	  req.flash('error', 'Error al editar el Quiz: '+error.message);
       next(error);
