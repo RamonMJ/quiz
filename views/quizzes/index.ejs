@@ -6,7 +6,12 @@
   </head>
   <body>
     <h1>Quiz: el juego de las preguntas</h1>
-
+	<form method="get" action="/quizzes">
+		 <p>
+		   <input type="text" name="busqueda" placeholder="Busca pregunta" /> 
+		   <input type="submit" value="Buscar">
+		 <p>		
+		</form>
 <table>
   <% for (var i in quizzes) { %>        
      <tr>
