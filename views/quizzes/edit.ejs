@@ -6,18 +6,15 @@
   </head>
   <body>
     <h1>Quiz: el juego de las preguntas</h1>
-	
-	
 <p>
-  Añadir pregunta: 
+Edite la pregunta
 </p>
 
 <p>
-  <form method="post" action="/quizzes" >      
-	<% include _form.ejs %>
+  <form method="post" action="/quizzes/<%= quiz.id %>?_method=PUT" >      
+     <% include _form.ejs %>
   </form>
 </p>
-
 
 </body>
 </html>
