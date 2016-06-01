@@ -30,6 +30,9 @@ exports.index=function(req,res,next) {
 		});
       
    } else{
+	var format = req.params.format || '';
+	
+	if(format === 'html' || format=== ''){
 	models.Quiz.findAll()
 	.then(function(quizzes) {
 	  res.render('quizzes/index.ejs', { quizzes: quizzes});
@@ -38,6 +41,20 @@ exports.index=function(req,res,next) {
 		next(error); 
 		});
 	}
+	else if(format === 'json'){
+		models.Quiz.findAll()
+	        .then(function(quizzes){
+			res.send(JSON.stringify(quizzes));
+		})
+		.catch(function(error){
+			next(error);
+		});
+		
+		}else{
+		   throw new Error("Error de formato");
+		}
+	}
+	
    };
 
 
@@ -45,7 +62,13 @@ exports.index=function(req,res,next) {
 // GET /quizzes/:id
 exports.show = function(req, res, next) {
 var answer = req.query.answer || '';
-res.render('quizzes/show', {quiz: req.quiz,answer: answer});
+var format = req.params.format || '';
+	if(format === 'html' || format=== ''){
+	   res.render('quizzes/show', {quiz: req.quiz,answer: answer});
+	}
+	else if(format === 'json'){
+		res.send(JSON.stringify(req.quiz));
+	}
 };
 
 
