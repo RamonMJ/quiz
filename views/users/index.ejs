@@ -18,7 +18,11 @@
     <tr>
       <th>Username</th>
       <th>Administrador</th>
-      <th></th>
+      
+      <% if (session.user) { %>
+        <th></th>
+      <% } %>
+
     </tr>
   </thead>
 
@@ -27,24 +31,30 @@
       <tr>
          <td> <%= users[i].username %>  </td>
          <td> <%= users[i].isAdmin ? "Si" : "No" %> </td>
-         <td> <a href="/users/<%= users[i].id %>" > Ver </a>
-              <a href="/users/<%= users[i].id %>/edit"> Editar </a>
-              <a href="/users/<%= users[i].id %>?_method=DELETE" 
-                 onClick="return confirm('Borrar cuenta: <%= users[i].username %>');" >
-                 Borrar </a> 
-         </td>
+         <% if (session.user) { %>
+           <td> <a href="/users/<%= users[i].id %>" > Ver </a>
+                <a href="/users/<%= users[i].id %>/edit"> Editar </a>
+                <a href="/users/<%= users[i].id %>?_method=DELETE" 
+                   onClick="return confirm('Borrar cuenta: <%= users[i].username %>');" >
+                   Borrar </a> 
+           </td>
+         <% } %>
       </tr>
     <%  }; %>
   </tbody>
 </table>
 
-<footer>
-  <nav> 
-      <a href="/users/new" > 
-           <button style="float:left">Crear nuevo Usuario</button>
-      </a>
-  </nav>
-</footer>
+
+<% if (session.user) { %>
+  <footer>
+    <nav> 
+        <a href="/users/new" > 
+             Crear nuevo Usuario 
+        </a> 
+    </nav>
+  </footer>
+<% } %>
+
 <section>
 
 </body>
