@@ -9,6 +9,7 @@ var partials = require('express-partials');
 var flash = require('express-flash');
 var methodOverride = require('method-override');
 
+var sessionController = ('./controllers/session_controller');
 var routes = require('./routes/index');
 
 var app = express();
@@ -30,6 +31,9 @@ if (app.get('env') === 'production') {
 
 app.use(partials());
 app.use(flash());
+
+
+app.use('/', sessionController.caduca);
 
 
 
@@ -55,6 +59,8 @@ app.use(function(req, res, next) {
 
    next();
 });
+
+
 
 app.use('/', routes);
 
