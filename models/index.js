@@ -40,6 +40,9 @@ Quiz.hasMany(Comment);
 User.hasMany(Quiz,{foreignKey: 'AuthorId'});
 Quiz.belongsTo(User,{as:'Author',foreignKey:'AuthorId'});
 
+User.hasMany(Comment, {foreignKey: 'AuthorId'});
+Comment.belongsTo(User, {as: 'Author', foreignKey: 'AuthorId'});
+
 Attachment.belongsTo(Quiz);
 Quiz.hasOne(Attachment);
 
